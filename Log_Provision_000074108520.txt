@@ -1,0 +1,19 @@
+ ./provisioning 000074108520
+Somfy Outdoor Camera
+provisionning version 1.0 (Mar 30 2018 11:12:50)
+[1m[31mERR[0m mac/mac_file/mac_file.c:24 [1m[33mcrypto_raw_mac_get_file() [0mImpossible to open the MAC address file
+MAC address does not exist
+MAC USED : 000074108520
+[1m[37mINF[0m myfox_crypto.c:49 [1m[33mml_crypto_init() [0mInitializing Crypto
+[1m[37mINF[0m aes/aes_file/aes_file.c:28 [1m[33mcrypto_aes_keys_initialized_file() [0mThe /etc/myfoxcam/aes file does not exists
+[1m[31mERR[0m aes/aes_file/aes_file.c:35 [1m[33mcrypto_aes_keys_initialized_file() [0mUnable to access the keys
+[1m[31mERR[0m aes/crypto_aes.c:62 [1m[33m_aes_load_keys() [0mAES load keys failed
+[1m[37mINF[0m drivers/atsha/Drv_I2cAtsha204.c:802 [1m[33mDrv_I2cAtsha204_Init() [0mInit ATSHA
+[1m[37mINF[0m drivers/atsha/Drv_I2cAtsha204.c:832 [1m[33mDrv_I2cAtsha204_Init() [0mATSHA Init SUCCESS
+[1m[37mINF[0m homekit/crypto_homekit.c:107 [1m[33m_crypto_homekit_initialized_file() [0mHomekit data has not been initialized
+[1m[37mINF[0m rsa1024/rsa_internal_file/rsa_internal_file.c:45 [1m[33mcrypto_rsa1024_read_internal_private_key_calibration_file() [0mKey has not been initialized yet
+[1m[34mDBG[0m rsa1024/crypto_rsa1024.c:41 [1m[33m_display_openssl_error() [0mOpenSSL error : error:0407B065:rsa routines:RSA_check_key:bad e value
+[1m[33mWRN[0m rsa1024/crypto_rsa1024.c:172 [1m[33mml_crypto_rsa1024_private_init() [0mInternal key invalid. Generating a new one and store it
+000074108520;Ri5wz9aai35UCvqjSKKGymDTWexPJ+1tZWg/1XOE+FQD1qy84npGan6d3bwl5wQXs2JecyuO1opoA0LP+Eh3IKLPQ/ia7sVmj22dxPGzz/q5qfLUtCgWSTVuHlXSYqiSaLlCxU6Ib+tMhLlJXt3CbM57C0iZtGvGYU60oVo7l31zzvggs9AVek0sE0ieC30ev6u1yTmwREV4bKdWFTIa1fCxW3yXMdbzl/fP4Q2CFRBowJoeLD6b3l7//3rJYVbh+nYHQV4WgfHzI9yzBDvEV8Nf07ws3KVjGb3YoxH0QzaE0Ml9wmWGpfctGA6M6NR+QZdMyMOTMjYg40K7RR5dcQ==;h9+RCjAb6ea1PeQTwXVS8P1JJNkHIpc5VAHVkjSOWNXgze6+QCzKdYTQWtZrgdWfiJDM+cpgikMiCVlhq17PDnn3azG5PRf7PMWRq2eWCUEgSU6Zh1V/J7r+dCj8yiGiSEfZHoat7cJcmG/tbTYYYd/cco0krG+qhUaRQ0bAbIXpsAFs855vXcHY4IWoARRFSxDrlhqERpo4cnBr5WOmYzVVvyNOKY+678EB1/4qtakodowRt+EvXA3zrYctNrhfvGrUTPvBiJFuebs/XtGmhxkaEqjFCq0HbqtzNcLSVJJJjUcuVtRBKszUzK/GdcFwQ5vcSZ59SLHg1MF4Bpy/rQ==;1JD6;99227208;X-HM://007KG2HQG1JD6
+[1m[37mINF[0m myfox_crypto.c:77 [1m[33mml_crypto_shutdown() [0mCrypto shutdown
+~ #
