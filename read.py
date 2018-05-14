@@ -30,6 +30,8 @@ for f in os.listdir():
         continue
     elif(f == 'read.py'):
         continue
+    elif(f == '.vscode'):
+        continue
     
     #start getting data from the .txt's
     with open(f , 'r') as txt:
