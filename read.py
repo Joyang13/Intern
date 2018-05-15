@@ -19,18 +19,9 @@ with open('intern.csv', 'w', newline='') as csv_file:
 
 
 #start looping over the files to save it in csv file
-#
 for f in os.listdir():
     #there are two extra files that we dont need
-    if(f == '.DS_Store'):
-        continue
-    elif(f == 'intern.csv'):
-        continue
-    elif(f == '.git'):
-        continue
-    elif(f == 'read.py'):
-        continue
-    elif(f == '.vscode'):
+    if f == '.DS_Store' or f == 'intern.csv' or f == '.git' or f == 'read.py' or f == '.vscode' or f == 'regex_to_csv.py':
         continue
     
     #start getting data from the .txt's
@@ -46,8 +37,3 @@ for f in os.listdir():
         csv_writer = csv.writer(csv_f)
         csv_writer.writerow([mac_, unique, key, home, code, payload])
 
-
-# with open('intern.csv' , 'r') as c:
-#     csv_reader = csv.reader(c)
-#     for line in csv_reader:
-#         print(line[0])
