@@ -2,55 +2,45 @@ import os
 import csv
 import re
 
-with open ('Log_Provision_0002BDF21A00.txt', 'r') as raw:
-    txt = raw.read()
+#in this code, we wanna first read the .txt file and find things through regex
+#then, you wanna store it in csv file
+#we can have 3 sub functions
+#1. txt_read(), reads a given file that outputs the text in it
+#2. regex(), takes in the text, outputs an array that has groups of the things we need
+#3. csv_write(), takes in data, write stuff in the csv, no output
 
-#set up patterns
-#for mac, the length of digits ranges from 8 to 12, all numbers or caps
-    #sneaky son!!! You just need the space in front haha
-    p_mac = re.compile(r' [A-Z0-9]{8,12}')
-    results = p_mac.finditer(txt)
+def main():
+    #create a csv file with header
+    with open('intern_regex.csv', 'w', newline = '') as csv_file:   
+        the_writer = csv.writer(csv_file)
+        the_writer.writerow(['mac', 'unique_id', 'public_key', 'home_id', 'homekit_code', 'homekit_payload'])
 
-    for result in results:
-        r_mac = result          #r_mac is our mac
-
-#for unique, suuper duper longd
-    #thought process: bound it with mac; and ==; then split it
-    # tx = '0002BDF21A00'
-    # p_unique = re.compile(tx + r';.*==;')
-    # matches = p_unique.finditer(txt)
-
-    # for match in matches:
-    #     print(match)
-
-#for home id, 4 digits, caps or num, a bit trickier, it's in between to colons
-    # p_id = re.compile(r';[0-9A-Z]{4};')
-    # matches = p_id.finditer(txt)
-
-    # for match in matches:
-    #     _id = match         #now you gotta split id, which idk how
-
-#for key
-    #thought process: bounded with ; and ==;homeid 
-    # tx = _id`1`
-    # p_key = re.compile(r';.*==;' + tx)
-    # matches = p_key.finditer(txt)
-
-    # for match in matches:
-    #     print(match)
-
-#for code, easy money lol, 8 digits and only numbers
-    p_code = re.compile(r'[0-9]{8}')
-    results = p_code.finditer(txt)
-
-    for result in results:
-        r_code = result
-
-#for payload, got 'em!
-    p_payload = re.compile(r'X-HM://.+')
-
-    results = p_payload.finditer(txt)
-
-    for result in results:
-        r_payload =  result
+    #put all .txt files in files
+    files = []              #contains different files of txt
+    for f in os.listdir():
+        if f.endswith(".txt"):
+            files.append(f)
     
+    for file in files:
+        text = txt_read(file)
+        rows = regex(text)          #to access mac we needa: for row in rows; row.group(1)
+        csv_write(rows)            #for row in rows: print (row.group(0))
+
+
+def txt_read(file):        #inputs a file, outputs a string of the file
+    with open(file, 'r') as raw:
+        return raw.read()
+
+def regex(text):           #inputs a string, outputs an array of things
+    #set up patterns for regex
+    pattern = re.compile(r'([0-9A-F]{12});(\S{344});(\S{344});([A-Z0-9]{4});(\d{8});(X-HM://.+)')
+    return pattern.finditer(text)
+
+def csv_write(rows):       #inputs iterator, which contains data that should be written in csv
+    for row in rows:
+        with open('intern_regex.csv', 'a', newline = '') as csv_f:
+            the_writer = csv.writer(csv_f)
+            the_writer.writerow([row.group(1), row.group(2), row.group(3), row.group(4), row.group(5), row.group(6)])
+
+if __name__ == "__main__":
+    main()

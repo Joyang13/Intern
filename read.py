@@ -32,6 +32,7 @@ for f in os.listdir():
         #parse the data to mac, unique, blah blah
         mac_, unique, key, home, code, payload = data[0].split(';')
 
+
     #putting stuff in csv file
     with open('intern.csv' , 'a', newline='') as csv_f:
         csv_writer = csv.writer(csv_f)
