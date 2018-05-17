@@ -1,6 +1,7 @@
 import os
 import csv
 import re
+import time
 
 #in this code, we wanna first read the .txt file and find things through regex
 #then, you wanna store it in csv file
@@ -9,7 +10,10 @@ import re
 #2. regex(), takes in the text, outputs an array that has groups of the things we need
 #3. csv_write(), takes in data, write stuff in the csv, no output
 
+
 def main():
+    startime = time.time()
+
     #create a csv file with header
     with open('intern_regex.csv', 'w', newline = '') as csv_file:   
         the_writer = csv.writer(csv_file)
@@ -21,10 +25,18 @@ def main():
         if f.endswith(".txt"):
             files.append(f)
     
+    #open file one by one and store them in a list of tuples
+    tuples_list = []
     for file in files:
         text = txt_read(file)
-        rows = regex(text)          #to access mac we needa: for row in rows; row.group(1)
-        csv_write(rows)            #for row in rows: print (row.group(0))
+        tup = regex(text)          #now we returned a tuple
+        tuples_list.append(tup)
+    
+    #you only wanna open and write once, so the input should be a list of tuples
+    csv_write(tuples_list)            #passing in a list of tuples to access
+
+    endtime = time.time()
+    print(endtime - startime)
 
 
 def txt_read(file):        #inputs a file, outputs a string of the file
@@ -34,13 +46,18 @@ def txt_read(file):        #inputs a file, outputs a string of the file
 def regex(text):           #inputs a string, outputs an array of things
     #set up patterns for regex
     pattern = re.compile(r'([0-9A-F]{12});(\S{344});(\S{344});([A-Z0-9]{4});(\d{8});(X-HM://.+)')
-    return pattern.finditer(text)
+    results = pattern.finditer(text)
+    tup = ()
+    for result in results:
+        for i in range(1,7):
+            tup = tup + (result.group(i), )
+    return tup
 
-def csv_write(rows):       #inputs iterator, which contains data that should be written in csv
-    for row in rows:
-        with open('intern_regex.csv', 'a', newline = '') as csv_f:
+def csv_write(tuples_list):       #inputs iterator, which contains data that should be written in csv
+    with open('intern_regex.csv', 'a', newline = '') as csv_f:
+        for i in range (0, 13):
             the_writer = csv.writer(csv_f)
-            the_writer.writerow([row.group(1), row.group(2), row.group(3), row.group(4), row.group(5), row.group(6)])
+            the_writer.writerow([tuples_list[i][0], tuples_list[i][1], tuples_list[i][2], tuples_list[i][3], tuples_list[i][4], tuples_list[i][5]])
 
 if __name__ == "__main__":
     main()

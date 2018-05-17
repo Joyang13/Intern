@@ -53,7 +53,7 @@ def sql3_int():
 def sql3(rows):
     #rows is a iterator, we gotta access row.group stuff
     for row in rows:
-        conn = sqlite3.connect('log_provision.db')
+        conn = sqlite3.connect(':memory:')
         c = conn.cursor()
 
 
